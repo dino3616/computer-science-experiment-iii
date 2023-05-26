@@ -1,0 +1,27 @@
+FROM ruby:3.2.2-bullseye
+
+WORKDIR /workspaces/computer-science-experiment-iii/
+
+RUN apt-get update \
+    && apt-get --no-install-recommends -y install \
+    git \
+    gnupg2 ca-certificates \
+    apache2 apache2-utils apache2-dev \
+    perl \
+    swi-prolog \
+    locales-all \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists
+
+# For programming-seminar-ii
+
+COPY ./experiments/programming-seminar-ii/localhost.conf /etc/apache2/sites-enabled/localhost.conf
+
+# For programming-seminar-iii
+
+WORKDIR /workspaces/computer-science-experiment-iii/experiments/programming-seminar-iii/
+
+COPY ./experiments/programming-seminar-iii/Gemfile /workspaces/computer-science-experiment-iii/experiments/programming-seminar-iii/Gemfile
+COPY ./experiments/programming-seminar-iii/Gemfile.lock /workspaces/computer-science-experiment-iii/experiments/programming-seminar-iii/Gemfile.lock
+RUN bundle config set --local with 'development' \
+    && bundle install

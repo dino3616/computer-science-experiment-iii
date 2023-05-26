@@ -1,0 +1,8 @@
+{
+  "[gemfile]": {
+    "editor.defaultFormatter": "LoranKloeze.ruby-rubocop-revived"
+  },
+  "[ruby]": {
+    "editor.defaultFormatter": "LoranKloeze.ruby-rubocop-revived"
+  }
+}

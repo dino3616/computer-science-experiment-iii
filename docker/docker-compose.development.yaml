@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  computer-science-experiment-iii-app:
+    container_name: computer-science-experiment-iii-app
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile.development
+    volumes:
+      - type: bind
+        source: ../
+        target: /workspaces/computer-science-experiment-iii/
+    tty: true

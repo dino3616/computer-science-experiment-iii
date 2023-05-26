@@ -1,0 +1,9 @@
+like(taro, coffee).
+like(hanako, tea).
+like(taro, cocoa).
+fly(X) :- airplane(X).
+airplane(jetplain).
+airplane(helicopter).
+walk(X) :- human(X).
+human(taro).
+human(hanako).

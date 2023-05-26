@@ -1,0 +1,24 @@
+{
+  "folders": [
+    {
+      "name": "computer-science-experiment-iii",
+      "path": "."
+    },
+    {
+      "name": "hardware-seminar",
+      "path": "./experiments/hardware-seminar"
+    },
+    {
+      "name": "programming-seminar-ii",
+      "path": "./experiments/programming-seminar-ii"
+    },
+    {
+      "name": "programming-seminar-iii",
+      "path": "./experiments/programming-seminar-iii"
+    },
+    {
+      "name": "software-system-development-seminar",
+      "path": "./experiments/software-system-development-seminar"
+    }
+  ]
+}

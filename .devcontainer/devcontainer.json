@@ -1,0 +1,39 @@
+{
+  "name": "computer-science-experiment-iii",
+  "workspaceFolder": "/workspaces/computer-science-experiment-iii/",
+  "dockerComposeFile": ["../docker/docker-compose.development.yaml"],
+  "service": "computer-science-experiment-iii-app",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "adam-bender.commit-message-editor",
+        "arthurwang.vsc-prolog",
+        "bscan.perlnavigator",
+        "castwide.solargraph",
+        "christian-kohler.path-intellisense",
+        "eamodio.gitlens",
+        "editorconfig.editorconfig",
+        "esbenp.prettier-vscode",
+        "github.copilot",
+        "github.copilot-labs",
+        "github.vscode-github-actions",
+        "gruntfuggly.todo-tree",
+        "hbenl.vscode-test-explorer",
+        "jeff-hykin.better-perl-syntax",
+        "kaiwood.endwise",
+        "lorankloeze.ruby-rubocop-revived",
+        "mikestead.dotenv",
+        "mpty.pack-apache",
+        "pkief.material-icon-theme",
+        "rebornix.ruby",
+        "tabnine.tabnine-vscode",
+        "tjmtmmnk.perl-auto-use",
+        "usernamehw.errorlens",
+        "utgwkk.perl-insert-package",
+        "utgwkk.perl-rename-symbol",
+        "visualstudioexptteam.vscodeintellic",
+        "wmaurer.change-case"
+      ]
+    }
+  }
+}
