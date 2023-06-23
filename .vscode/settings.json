@@ -155,12 +155,14 @@
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
   "files.associations": {
+    "*.cgi": "perl",
     "*.pl": "perl",
     "*.swi": "prolog"
   },
   "files.encoding": "utf8",
   "files.eol": "\n",
   "material-icon-theme.files.associations": {
+    "*.cgi": "perl",
     "*.pl": "perl",
     "*.swi": "prolog"
   },
@@ -174,6 +176,7 @@
     "editor.defaultFormatter": "arthurwang.vsc-prolog"
   },
   "[ruby]": {
-    "editor.defaultFormatter": "LoranKloeze.ruby-rubocop-revived"
+    "editor.defaultFormatter": "LoranKloeze.ruby-rubocop-revived",
+    "editor.tabSize": 2
   }
 }
