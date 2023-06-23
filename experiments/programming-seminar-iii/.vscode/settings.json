@@ -3,6 +3,7 @@
     "editor.defaultFormatter": "LoranKloeze.ruby-rubocop-revived"
   },
   "[ruby]": {
-    "editor.defaultFormatter": "LoranKloeze.ruby-rubocop-revived"
+    "editor.defaultFormatter": "LoranKloeze.ruby-rubocop-revived",
+    "editor.tabSize": 2
   }
 }
