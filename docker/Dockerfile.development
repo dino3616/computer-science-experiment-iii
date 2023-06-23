@@ -7,7 +7,7 @@ RUN apt-get update \
     git \
     gnupg2 ca-certificates \
     apache2 apache2-utils apache2-dev \
-    perl \
+    perl libapache2-mod-perl2 \
     swi-prolog \
     locales-all \
     && apt-get clean \
@@ -16,6 +16,7 @@ RUN apt-get update \
 # For programming-seminar-ii
 
 COPY ./experiments/programming-seminar-ii/localhost.conf /etc/apache2/sites-enabled/localhost.conf
+RUN cpan CGI
 
 # For programming-seminar-iii
 
