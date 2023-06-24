@@ -15,8 +15,10 @@ RUN apt-get update \
 
 # For programming-seminar-ii
 
-COPY ./experiments/programming-seminar-ii/localhost.conf /etc/apache2/sites-enabled/localhost.conf
+COPY ./experiments/programming-seminar-ii/apache2.conf /etc/apache2/conf-available/apache2.conf
 RUN cpan CGI
+RUN a2enmod cgi && a2enmod rewrite
+RUN chmod 777 /var/www/html/ && chmod 777 /usr/lib/ && chmod 777 /usr/bin/perl
 
 # For programming-seminar-iii
 
