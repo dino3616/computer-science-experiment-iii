@@ -6,6 +6,7 @@ RUN apt-get update \
     && apt-get --no-install-recommends -y install \
     git \
     gnupg2 ca-certificates \
+    gcc g++ make \
     apache2 apache2-utils apache2-dev \
     perl libapache2-mod-perl2 \
     swi-prolog \

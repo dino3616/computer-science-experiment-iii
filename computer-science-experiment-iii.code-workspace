@@ -19,6 +19,10 @@
     {
       "name": "software-system-development-seminar",
       "path": "./experiments/software-system-development-seminar"
+    },
+    {
+      "name": "statistics",
+      "path": "./experiments/statistics"
     }
   ]
 }

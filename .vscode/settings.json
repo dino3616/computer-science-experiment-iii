@@ -148,6 +148,8 @@
     "",
     "{footer}"
   ],
+  "C_Cpp.clang_format_style": "Google",
+  "C_Cpp.vcFormat.space.pointerReferenceAlignment": "right",
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
@@ -166,8 +168,15 @@
     "*.pl": "perl",
     "*.swi": "prolog"
   },
+  "[c]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools"
+  },
   "[gemfile]": {
     "editor.defaultFormatter": "LoranKloeze.ruby-rubocop-revived"
+  },
+  "[makefile]": {
+    "editor.insertSpaces": false,
+    "editor.tabSize": 2
   },
   "[perl]": {
     "editor.defaultFormatter": "bscan.perlnavigator"
