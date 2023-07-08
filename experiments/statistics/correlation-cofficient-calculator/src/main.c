@@ -18,7 +18,8 @@ int main(int argc, char* argv[]) {
   if (argc < 2) {
     log_error(
         "Argument variable too short; expected to receive two or more, "
-        "received one.\nformat: <bin> [path to data file]");
+        "received one.\n",
+        "format: <bin> [path to data file]");
 
     return EXIT_FAILURE;
   }
