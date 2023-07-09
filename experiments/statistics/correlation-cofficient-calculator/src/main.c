@@ -9,22 +9,21 @@
 
 #define DATA_LIST_SIZE 2
 
-float* calc_correlation_cofficient_from_data(float* data1, size_t data1_size,
-                                             float* data2, size_t data2_size,
-                                             size_t data_size,
-                                             float* correlation_cofficient);
+int calc_correlation_cofficient_from_data(float *data1, size_t data1_size,
+                                          float *data2, size_t data2_size,
+                                          size_t data_size);
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
   if (argc < 2) {
     log_error(
         "Argument variable too short; expected to receive two or more, "
-        "received one.\n",
+        "received one.\n"
         "format: <bin> [path to data file]");
 
     return EXIT_FAILURE;
   }
 
-  Data_t* data_list = (Data_t*)malloc(sizeof(Data_t) * DATA_LIST_SIZE);
+  Data_t *data_list = (Data_t *)malloc(sizeof(Data_t) * DATA_LIST_SIZE);
   if (data_list == NULL) {
     int error_number = errno;
     log_error("Failed to allocate memory for data. cause: '%s'",
@@ -39,26 +38,13 @@ int main(int argc, char* argv[]) {
     return EXIT_FAILURE;
   }
 
-  float* correlation_cofficient = (float*)malloc(sizeof(float));
-  if (correlation_cofficient == NULL) {
-    int error_number = errno;
-    log_error(
-        "Failed to allocate memory for correlation_cofficient. cause: '%s'",
-        strerror(error_number));
-
-    return EXIT_FAILURE;
-  }
-
   if (calc_correlation_cofficient_from_data(
           data_list[0].data, data_list[0].data_size, data_list[1].data,
-          data_list[1].data_size, data_list->data_size,
-          correlation_cofficient) == NULL) {
+          data_list[1].data_size, data_list->data_size) != EXIT_SUCCESS) {
     log_error("Failed to calculate correlation cofficient from data.");
 
     return EXIT_FAILURE;
   }
-
-  free(correlation_cofficient);
 
   for (size_t i = 0; i < DATA_LIST_SIZE; i++) {
     free(data_list[i].data);
@@ -68,27 +54,26 @@ int main(int argc, char* argv[]) {
   return EXIT_SUCCESS;
 }
 
-float* calc_correlation_cofficient_from_data(float* data1, size_t data1_size,
-                                             float* data2, size_t data2_size,
-                                             size_t data_size,
-                                             float* correlation_cofficient) {
+int calc_correlation_cofficient_from_data(float *data1, size_t data1_size,
+                                          float *data2, size_t data2_size,
+                                          size_t data_size) {
   float data1_mean = calc_mean(data1, data1_size);
   float data2_mean = calc_mean(data2, data2_size);
 
   log_info("data1_mean: %f", data1_mean);
   log_info("data2_mean: %f", data2_mean);
 
-  float* data1_deviations = (float*)malloc(sizeof(float) * data1_size);
+  float *data1_deviations = (float *)malloc(sizeof(float) * data1_size);
   if (data1_deviations == NULL) {
     log_error("Failed to allocate memory for data1_deviations.");
 
-    return NULL;
+    return EXIT_FAILURE;
   }
-  float* data2_deviations = (float*)malloc(sizeof(float) * data2_size);
+  float *data2_deviations = (float *)malloc(sizeof(float) * data2_size);
   if (data2_deviations == NULL) {
     log_error("Failed to allocate memory for data2_deviations.");
 
-    return NULL;
+    return EXIT_FAILURE;
   }
   calc_deviations(data1, data1_size, data1_mean, data1_deviations, data1_size);
   calc_deviations(data2, data2_size, data2_mean, data2_deviations, data2_size);
@@ -117,13 +102,13 @@ float* calc_correlation_cofficient_from_data(float* data1, size_t data1_size,
 
   log_info("covariance: %f", covariance);
 
-  *correlation_cofficient = calc_correlation_cofficient(
+  float correlation_cofficient = calc_correlation_cofficient(
       covariance, data1_std_deviation, data2_std_deviation);
 
-  log_info("correlation_cofficient: %f", *correlation_cofficient);
+  log_info("correlation_cofficient: %f", correlation_cofficient);
 
   free(data1_deviations);
   free(data2_deviations);
 
-  return correlation_cofficient;
+  return EXIT_SUCCESS;
 }
