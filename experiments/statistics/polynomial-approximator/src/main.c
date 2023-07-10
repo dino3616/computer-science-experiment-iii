@@ -10,9 +10,9 @@
 
 #define DATA_LIST_SIZE 2
 
-int polynomial_regression(float *data1, size_t data1_size, float *data2,
-                          float *coefficients, size_t degree);
-int calc_regression_curve(float *data1, size_t data1_size, float *data2,
+int polynomial_regression(double *data1, size_t data1_size, double *data2,
+                          double *coefficients, size_t degree);
+int calc_regression_curve(double *data1, size_t data1_size, double *data2,
                           size_t data_size, int degree);
 
 #include <stdio.h>
@@ -60,9 +60,9 @@ int main(int argc, char *argv[]) {
   return EXIT_SUCCESS;
 }
 
-int calc_regression_curve(float *data1, size_t data1_size, float *data2,
+int calc_regression_curve(double *data1, size_t data1_size, double *data2,
                           size_t data_size, int degree) {
-  float *coefficients = (float *)malloc(sizeof(float) * (degree + 1));
+  double *coefficients = (double *)malloc(sizeof(double) * (degree + 1));
   if (coefficients == NULL) {
     log_error("Failed to allocate memory for coefficients.");
 
@@ -78,12 +78,12 @@ int calc_regression_curve(float *data1, size_t data1_size, float *data2,
   }
 
   log_info("Polynomial regression curve:");
-  log_info("y = %f", coefficients[0]);
+  log_info("y = %lf", coefficients[0]);
   for (int i = 1; i <= degree; i++) {
-    log_info(" + (%f * x^%d)", coefficients[i], i);
+    log_info(" + (%lf * x^%d)", coefficients[i], i);
   }
 
-  float *predicted = malloc(sizeof(float) * data_size);
+  double *predicted = malloc(sizeof(double) * data_size);
   if (predicted == NULL) {
     log_error("Failed to allocate memory for predicted values.");
 
@@ -93,8 +93,8 @@ int calc_regression_curve(float *data1, size_t data1_size, float *data2,
   }
 
   for (size_t i = 0; i < data_size; i++) {
-    float x = data1[i];
-    float y = coefficients[0];
+    double x = data1[i];
+    double y = coefficients[0];
 
     for (int j = 1; j <= degree; j++) {
       y += coefficients[j] * pow(x, j);
@@ -103,9 +103,9 @@ int calc_regression_curve(float *data1, size_t data1_size, float *data2,
     predicted[i] = y;
   }
 
-  float r_squared = calc_r_squared(data2, predicted, data_size);
+  double r_squared = calc_r_squared(data2, predicted, data_size);
 
-  log_info("r-squared: R2 = %f", r_squared);
+  log_info("r-squared: R2 = %lf", r_squared);
 
   free(coefficients);
   free(predicted);
@@ -113,9 +113,9 @@ int calc_regression_curve(float *data1, size_t data1_size, float *data2,
   return EXIT_SUCCESS;
 }
 
-int polynomial_regression(float *data1, size_t data1_size, float *data2,
-                          float *coefficients, size_t degree) {
-  float **matrix = (float **)malloc(sizeof(float *) * (degree + 1));
+int polynomial_regression(double *data1, size_t data1_size, double *data2,
+                          double *coefficients, size_t degree) {
+  double **matrix = (double **)malloc(sizeof(double *) * (degree + 1));
   if (matrix == NULL) {
     log_error("Failed to allocate memory for matrix rows.");
 
@@ -123,7 +123,7 @@ int polynomial_regression(float *data1, size_t data1_size, float *data2,
   }
 
   for (size_t i = 0; i <= degree; i++) {
-    matrix[i] = (float *)malloc(sizeof(float) * (degree + 1));
+    matrix[i] = (double *)malloc(sizeof(double) * (degree + 1));
     if (matrix[i] == NULL) {
       log_error("Failed to allocate memory for matrix columns.");
 
@@ -140,7 +140,7 @@ int polynomial_regression(float *data1, size_t data1_size, float *data2,
     }
   }
 
-  float *vector = (float *)malloc(sizeof(float) * (degree + 1));
+  double *vector = (double *)malloc(sizeof(double) * (degree + 1));
   if (vector == NULL) {
     log_error("Failed to allocate memory for vector.");
 
@@ -157,8 +157,8 @@ int polynomial_regression(float *data1, size_t data1_size, float *data2,
   }
 
   for (size_t i = 0; i < data1_size; i++) {
-    float x = data1[i];
-    float y = data2[i];
+    double x = data1[i];
+    double y = data2[i];
 
     for (size_t j = 0; j <= degree; j++) {
       for (size_t k = 0; k <= degree; k++) {

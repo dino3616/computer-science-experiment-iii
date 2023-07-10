@@ -18,7 +18,7 @@ int read_data(FILE *fp, Data_t *data_list, size_t data_list_size) {
   }
 
   for (size_t i = 0; i < data_list_size; i++) {
-    data_list[i].data = malloc(sizeof(float) * data_size);
+    data_list[i].data = malloc(sizeof(double) * data_size);
     if (data_list[i].data == NULL) {
       int error_number = errno;
       log_error("Failed to allocate memory for Data::data. cause: '%s'",
@@ -32,8 +32,8 @@ int read_data(FILE *fp, Data_t *data_list, size_t data_list_size) {
 
   for (size_t i = 0; i < data_size; i++) {
     for (size_t j = 0; j < data_list_size; j++) {
-      float datum;
-      if (fscanf(fp, "%f", &datum) != 1) {
+      double datum;
+      if (fscanf(fp, "%lf", &datum) != 1) {
         int error_number = errno;
         log_error("Faild to read datum from file. cause: '%s'",
                   strerror(error_number));

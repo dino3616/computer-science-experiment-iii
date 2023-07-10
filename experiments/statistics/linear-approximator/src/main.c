@@ -9,7 +9,7 @@
 
 #define DATA_LIST_SIZE 2
 
-int calc_regression_curve(float *data1, size_t data1_size, float *data2,
+int calc_regression_curve(double *data1, size_t data1_size, double *data2,
                           size_t data2_size, size_t data_size);
 
 int main(int argc, char *argv[]) {
@@ -53,18 +53,18 @@ int main(int argc, char *argv[]) {
   return EXIT_SUCCESS;
 }
 
-int calc_regression_curve(float *data1, size_t data1_size, float *data2,
+int calc_regression_curve(double *data1, size_t data1_size, double *data2,
                           size_t data2_size, size_t data_size) {
-  float data1_mean = calc_mean(data1, data1_size);
-  float data2_mean = calc_mean(data2, data2_size);
+  double data1_mean = calc_mean(data1, data1_size);
+  double data2_mean = calc_mean(data2, data2_size);
 
-  float *data1_deviations = (float *)malloc(sizeof(float) * data1_size);
+  double *data1_deviations = (double *)malloc(sizeof(double) * data1_size);
   if (data1_deviations == NULL) {
     log_error("Failed to allocate memory for data1_deviations.");
 
     return EXIT_FAILURE;
   }
-  float *data2_deviations = (float *)malloc(sizeof(float) * data2_size);
+  double *data2_deviations = (double *)malloc(sizeof(double) * data2_size);
   if (data2_deviations == NULL) {
     log_error("Failed to allocate memory for data2_deviations.");
 
@@ -73,26 +73,26 @@ int calc_regression_curve(float *data1, size_t data1_size, float *data2,
   calc_deviations(data1, data1_size, data1_mean, data1_deviations, data1_size);
   calc_deviations(data2, data2_size, data2_mean, data2_deviations, data2_size);
 
-  float data1_variance = calc_variance(data1_deviations, data1_size);
+  double data1_variance = calc_variance(data1_deviations, data1_size);
 
-  float covariance =
+  double covariance =
       calc_covariance(data1, data1_mean, data2, data2_mean, data_size);
 
-  float regression_coefficient = covariance / data1_variance;
+  double regression_coefficient = covariance / data1_variance;
 
-  float intercept = data2_mean - regression_coefficient * data1_mean;
+  double intercept = data2_mean - regression_coefficient * data1_mean;
 
-  log_info("regression curve: y = %fx + (%f)", regression_coefficient,
+  log_info("regression curve: y = %lfx + (%lf)", regression_coefficient,
            intercept);
 
-  float *predicted = malloc(sizeof(float) * data_size);
+  double *predicted = malloc(sizeof(double) * data_size);
   for (size_t i = 0; i < data_size; i++) {
     predicted[i] = regression_coefficient * data1[i] + intercept;
   }
 
-  float r_squared = calc_r_squared(data2, predicted, data_size);
+  double r_squared = calc_r_squared(data2, predicted, data_size);
 
-  log_info("r-squared: R2 = %f", r_squared);
+  log_info("r-squared: R2 = %lf", r_squared);
 
   free(data1_deviations);
   free(data2_deviations);

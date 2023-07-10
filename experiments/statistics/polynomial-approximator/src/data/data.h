@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 typedef struct Data {
-  float *data;
+  double *data;
   size_t data_size;
 } Data_t;
 
