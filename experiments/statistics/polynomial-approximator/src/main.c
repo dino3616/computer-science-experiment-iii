@@ -10,10 +10,10 @@
 
 #define DATA_LIST_SIZE 2
 
-int polynomial_regression(double *data1, size_t data1_size, double *data2,
+int calc_regression_curve(double *data1, double *data2, size_t data_size,
+                          int degree);
+int polynomial_regression(double *data1, double *data2, size_t data_size,
                           double *coefficients, size_t degree);
-int calc_regression_curve(double *data1, size_t data1_size, double *data2,
-                          size_t data_size, int degree);
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -44,9 +44,8 @@ int main(int argc, char *argv[]) {
   }
 
   size_t degree = atoi(argv[2]);
-  if (calc_regression_curve(data_list[0].data, data_list[0].data_size,
-                            data_list[1].data, data_list->data_size,
-                            degree) != EXIT_SUCCESS) {
+  if (calc_regression_curve(data_list[0].data, data_list[1].data,
+                            data_list->data_size, degree) != EXIT_SUCCESS) {
     log_error("Failed to calculate regression curve from data.");
 
     return EXIT_FAILURE;
@@ -60,8 +59,8 @@ int main(int argc, char *argv[]) {
   return EXIT_SUCCESS;
 }
 
-int calc_regression_curve(double *data1, size_t data1_size, double *data2,
-                          size_t data_size, int degree) {
+int calc_regression_curve(double *data1, double *data2, size_t data_size,
+                          int degree) {
   double *coefficients = (double *)malloc(sizeof(double) * (degree + 1));
   if (coefficients == NULL) {
     log_error("Failed to allocate memory for coefficients.");
@@ -69,7 +68,7 @@ int calc_regression_curve(double *data1, size_t data1_size, double *data2,
     return EXIT_FAILURE;
   }
 
-  if (polynomial_regression(data1, data1_size, data2, coefficients, degree) !=
+  if (polynomial_regression(data1, data2, data_size, coefficients, degree) !=
       EXIT_SUCCESS) {
     log_error("Failed to calculate polynomial regression.");
 
@@ -113,7 +112,7 @@ int calc_regression_curve(double *data1, size_t data1_size, double *data2,
   return EXIT_SUCCESS;
 }
 
-int polynomial_regression(double *data1, size_t data1_size, double *data2,
+int polynomial_regression(double *data1, double *data2, size_t data_size,
                           double *coefficients, size_t degree) {
   double **matrix = (double **)malloc(sizeof(double *) * (degree + 1));
   if (matrix == NULL) {
@@ -156,7 +155,7 @@ int polynomial_regression(double *data1, size_t data1_size, double *data2,
     vector[i] = 0.0;
   }
 
-  for (size_t i = 0; i < data1_size; i++) {
+  for (size_t i = 0; i < data_size; i++) {
     double x = data1[i];
     double y = data2[i];
 
