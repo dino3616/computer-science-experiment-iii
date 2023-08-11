@@ -15,4 +15,3 @@ for (my $i = $x; $i <= $y; $i++) {
 }
 
 print "Sum of integers between $x and $y is $sum.\n";
-
